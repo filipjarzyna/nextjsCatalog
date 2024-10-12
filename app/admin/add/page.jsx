@@ -1,20 +1,34 @@
 'use client'
 import React from 'react'
 import { useState } from 'react'
+import { toast } from 'react-toastify'
+import { categoriesList, brandsList } from '@components/products/lists'
 
 
 function AddProduct() {
-    const categories = ["Sterowniki Poduszek AIRBAG", "Tasmy", "Poduszki"]
-    const brands = ["Fiat", "Audi", "Volvo", "Skoda", "Mercedes"]
-
-    const [formData, setFormData] = useState({
+    
+    const defaultData = {
         name: "",
         price: 0,
         category: "",
         brand: "",
         location: 0,
         file: null
-    })
+    }
+    const [formData, setFormData] = useState(defaultData)
+
+    // good looking alerts from toastify
+    const errorAlert = () => {
+        toast.error('Error, cos poszlo nie tak', {
+            position: 'top-left'
+        })
+    } 
+    const addedProductAlert = () => {
+        toast.success('Produkt dodany', {
+            position: 'top-left'
+        })
+    } 
+
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -33,7 +47,12 @@ function AddProduct() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        
+        if (formData.name == "" || formData.price == 0 || formData.brand == "" || formData.category == ""){
+            return
+        }
 
+        //change format to nextj FormData
         const data = new FormData()
         data.append("name", formData.name)
         data.append("price", formData.price)
@@ -49,11 +68,17 @@ function AddProduct() {
                 body: data,
             })
 
-            console.log(res)
+            //reset form to default
+            const form = e.target.closest('form')
+            form.reset()
+            setFormData(defaultData) 
+            
+            addedProductAlert()
+            console.log('submited: ', formData)
         } catch (error) {
+            errorAlert()
             console.log(error)
         }
-        console.log('submited: ', formData)
     }
 
     return (
@@ -70,7 +95,7 @@ function AddProduct() {
                 <label htmlFor="category" className="block mb-2 text-xl font-medium text-gray-900 dark:text-white">Kategoria</label>
                 <select name="category" id="category" onChange={handleChange} defaultValue={"-"} className="bg-gray-600 border border-gray-300 text-white text-xl rounded-lg p-3 w-full">
                     <option value={"-"} hidden disabled>-</option>
-                    {categories.map((item, index) => (
+                    {categoriesList.map((item, index) => (
                         <option value={item} key={index}>{item}</option>
                     ))}
 
@@ -80,7 +105,7 @@ function AddProduct() {
                 <label htmlFor="brand" className="block mb-2 text-xl font-medium text-gray-900 dark:text-white">Marka</label>
                 <select name="brand" id="brand" onChange={handleChange} defaultValue={"-"} className="bg-gray-600 border border-gray-300 text-white text-xl rounded-lg p-3 w-full">
                     <option value={"-"} hidden disabled>-</option>
-                    {brands.map((item, index) => (
+                    {brandsList.map((item, index) => (
                         <option value={item} key={index}>{item}</option>
                     ))}
                 </select>

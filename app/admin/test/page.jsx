@@ -10,7 +10,6 @@ function page() {
 
     const testFetch = async () => {
         try{
-
             const res = await fetch("/api/products", {method: "GET"})
             const result = await res.json()
             

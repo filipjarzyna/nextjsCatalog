@@ -1,9 +1,8 @@
 import React from 'react'
-import FilterCategory from './FilterCategory'
+import FilterBrand from './FilterCategory'
+import { brandsList } from '../lists'
 
-const FilterTab = () => {
-
-  const catList = ["FIAT", "BWM", "VOLVO", "NISSAN", "FORD", "AUDI"]
+const FilterTab = ({handleBrand, handleCategory}) => {
 
   return (
     <div className="z-10 w-56 p-3 rounded-lg select-none">
@@ -11,14 +10,14 @@ const FilterTab = () => {
         Marka
       </h6>
       <div className='text-xl'>
-        {catList.map((item, index) => (
-          <FilterCategory
+        {brandsList.map((item, index) => (
+          <FilterBrand
             key={index}
-            category={item}
+            brand={item}
+            handleChange={handleBrand}
           />
         ))}
-      </div>
-
+      </div>      
     </div>
   )
 }

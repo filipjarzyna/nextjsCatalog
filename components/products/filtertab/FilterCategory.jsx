@@ -1,16 +1,16 @@
 import React from 'react'
 
-const FilterCategory = ({category}) => {
+const FilterBrand = ({brand, handleChange}) => {
   return (
     <li className="flex items-center">
-    <input id="apple" type="checkbox" value=""
+    <input id="apple" type="checkbox" value={brand} onChange={(e) => handleChange(e.target.value)}
       className="w-4 h-4 bg-gray-100 rounded focus:ring-red-500" />
 
     <label htmlFor="apple" className="ml-2">
-      {category}
+      {brand}
     </label>
   </li>
   )
 }
 
-export default FilterCategory
+export default FilterBrand

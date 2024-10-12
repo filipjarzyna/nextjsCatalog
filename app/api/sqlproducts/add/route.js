@@ -27,12 +27,11 @@ export const POST = async (req) => {
       location: formData.get("location"),
     }
 
-    let fileName;
     //if file was sent
     if (file != null) {
-
-
+      
       //file name and extension
+      let fileName;
       fileName = file.name.toString()
       const fileType = fileName.slice(fileName.lastIndexOf('.'), fileName.length)
       console.log("NAME: ", fileName)
@@ -44,7 +43,7 @@ export const POST = async (req) => {
       console.log("NAME AFTER: ", fileName)
       
 
-      //add item to a sql db, if name is already added increment quantity, before saving file 
+      //add item to a sql db, if name is already added increment quantity, before saving file 2
       const q = await pool.query(
         `INSERT INTO Products (name, price, image, category, location, brand)
           VALUES ('${values.name}', ${values.price}, '${fileName}', '${values.category}', ${values.location}, '${values.brand}')
