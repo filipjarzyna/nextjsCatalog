@@ -19,7 +19,7 @@ export async function generateStaticParams() {
 
 export default async function ProductPage({ params }) {
     const { slug } = params
-
+    console.log("slug: ", slug)
     const productPromise = fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products/single?name=${slug}`, { method: "GET", cache: 'no-cache', })
 
     // fetch product

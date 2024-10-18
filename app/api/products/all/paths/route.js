@@ -3,8 +3,8 @@ import { NextResponse } from "next/server";
 
 export const GET = async (req) => {
     try {
-
-        const [q] = await pool.query("SELECT REPLACE(LOWER(name), ' ', '-') AS `name` FROM Products;")
+        //"SELECT REPLACE(LOWER(name), ' ', '-') AS `name` FROM Products;"
+        const [q] = await pool.query("SELECT name FROM Products")
 
         return NextResponse.json({ data: q }, { status: 200 })
     } catch (error) {
