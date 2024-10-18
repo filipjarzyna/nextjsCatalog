@@ -2,7 +2,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
-import { categoriesList, brandsList } from '@components/products/lists'
+import { categoriesList, brandsList } from '@components/reusable/Variables'
 
 
 function AddProduct() {

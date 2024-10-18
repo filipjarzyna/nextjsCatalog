@@ -1,4 +1,4 @@
-import { brandsList, categoriesList } from "@components/products/lists";
+import { brandsList, categoriesList } from "@components/reusable/Variables";
 import pool from "@utils/sqldb";
 import { NextResponse } from "next/server";
 

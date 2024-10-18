@@ -2,7 +2,7 @@
 import FilterTab from '@components/products/filtertab/FilterTab'
 import ProductCard from '@components/products/ProductCard'
 import Searchbar from '@components/products/Searchbar'
-import { brandsList, categoriesList } from '@components/products/lists'
+import { brandsList, categoriesList } from '@components/reusable/Variables'
 
 import React from 'react'
 import { useEffect, useState } from 'react'
@@ -25,20 +25,20 @@ const Sklep = () => {
     const handleBrand = (newBrand) => {
         const index = brandsList.indexOf(newBrand)
         if (index < 0) return
-        
+
         if (brands.includes(index)) {
             setBrands((prev) => prev.filter((c) => c != index))
         } else {
             setBrands((prev) => [...prev, index])
         }
     }
-    
+
     //function used to handle storing indexes of categories chosen by the user
     //in the categories useState. Index is based on categoriesList
     const handleCategory = (newCategory) => {
         const index = categoriesList.indexOf(newCategory)
         if (index < 0) return
-        
+
         if (categories.includes(index)) {
             setCategories((prev) => prev.filter((c) => c != index))
         } else {
@@ -103,30 +103,32 @@ const Sklep = () => {
 
     return (
         <>
-            <div className='grid grid-cols-6'>
-                <div className='col-span-6'>
-                    <Searchbar
+            <div className='grid grid-cols-4 md:grid-cols-6'>
+                <br />
+                <div className='col-span-5'>
+                    <Searchbar  
                         handleSearch={handleSearch}
                         searchInput={searchInput}
                         setSearchInput={setSearchInput}
                     />
                 </div>
-                <div className='row-span-10'>
+                <div className='row-span-10 col-span-1 md:col-span-2 lg:col-span-1 sm:col-span-2'>
                     <FilterTab
                         handleBrand={handleBrand}
                         handleCategory={handleCategory}
                     />
                 </div>
-                <div className='grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 col-span-5'>
+                <div className='grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 col-span-3 lg:col-span-5 md:col-span-4 justify-between'>
                     {allProducts && allProducts.map((product, index) => (
-                        <ProductCard
-                            name={product.name}
-                            image={product.image}
-                            price={product.price}
-                            category={product.category}
-                            brand={product.brand}
-                            key={index}
-                        />
+                        <div key={index} className='flex justify-center items-center m-2'>
+                            <ProductCard
+                                name={product.name}
+                                image={product.image}
+                                price={product.price}
+                                category={product.category}
+                                brand={product.brand}
+                            />
+                        </div>
                     ))
                     }
                 </div>
