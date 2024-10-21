@@ -1,8 +1,10 @@
 import React from 'react'
 
-const SklepLayout = ({children}) => {
+const SklepLayout = ({ children }) => {
   return (
-    <div>{children}</div>
+    <div className='container mx-auto'>
+      {children}
+    </div>
   )
 }
 

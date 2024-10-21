@@ -25,7 +25,7 @@ const Navbar = () => {
                 </div>
 
                 {/* desktop menu */}
-                <div className='hidden md:flex w-full justify-between items-center select-none'>
+                <div className='hidden md:flex w-full justify-between items-center select-none mx-3'>
                     <div className='w-20'>
                         <Image src='/logo/testlogo.jpg' alt="logo" width={44} height={44} className='rounded-full' />
                     </div>

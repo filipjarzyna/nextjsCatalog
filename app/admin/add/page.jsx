@@ -28,8 +28,7 @@ function AddProduct() {
             position: 'top-left'
         })
     } 
-
-
+    
     const handleChange = (e) => {
         const { name, value } = e.target
         setFormData((prev) => ({

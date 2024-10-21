@@ -16,12 +16,9 @@ export const POST = async (req) => {
     try {
         const result = await req.json()
 
-        console.log("-----------")
-        console.log(result)
         const brands = indexesToArray(result.brands, brandsList)
         const categories = indexesToArray(result.categories, categoriesList)
         const search = result.search
-        console.log(brands)
 
         if (!search && !categories && !brands) {
             throw new Error("No parameters passed")
@@ -55,7 +52,6 @@ export const POST = async (req) => {
         }
 
         const [q] = await pool.query(query, queryParams)  
-        console.log(q)  
         return NextResponse.json({ data: q }, { status: 200 })
     } catch (error) {
         console.log(error)

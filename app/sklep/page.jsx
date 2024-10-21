@@ -1,10 +1,11 @@
 'use client'
 import FilterTab from '@components/products/filtertab/FilterTab'
-import ProductCard from '@components/products/ProductCard'
+import ProductCard from '@components/products/grid/ProductCard'
 import Searchbar from '@components/products/Searchbar'
+import Loading from '@components/reusable/Loading'
 import { brandsList, categoriesList } from '@components/reusable/Variables'
 
-import React from 'react'
+import React, { Suspense } from 'react'
 import { useEffect, useState } from 'react'
 // import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 
@@ -95,43 +96,43 @@ const Sklep = () => {
 
     //testing  
     useEffect(() => {
-        console.log("brands: ", brands)
-        console.log("search: ", searchInput)
         fetchProducts()
     }, [brands, searchInput])
 
 
     return (
         <>
-            <div className='grid grid-cols-4 md:grid-cols-6'>
-                <br />
-                <div className='col-span-5'>
-                    <Searchbar  
+            <div className='grid grid-cols-5 md:grid-cols-6 lg:grid-cols-8'>
+                <div className='col-span-2'/>
+                <div className='col-span-3 md:col-span-4 lg:col-span-6'>
+                    <Searchbar
                         handleSearch={handleSearch}
                         searchInput={searchInput}
                         setSearchInput={setSearchInput}
                     />
                 </div>
-                <div className='row-span-10 col-span-1 md:col-span-2 lg:col-span-1 sm:col-span-2'>
+                <div className='row-span-10 col-span-2'>
                     <FilterTab
                         handleBrand={handleBrand}
                         handleCategory={handleCategory}
                     />
                 </div>
-                <div className='grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 col-span-3 lg:col-span-5 md:col-span-4 justify-between'>
-                    {allProducts && allProducts.map((product, index) => (
-                        <div key={index} className='flex justify-center items-center m-2'>
-                            <ProductCard
-                                name={product.name}
-                                image={product.image}
-                                price={product.price}
-                                category={product.category}
-                                brand={product.brand}
-                            />
-                        </div>
-                    ))
-                    }
-                </div>
+                <Suspense fallback={<Loading />}>
+                    <div className='grid col-span-3 md:col-span-4 lg:col-span-6 xl:grid-cols-3 2xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 justify-around'>
+                        {allProducts && allProducts.map((product, index) => (
+                            <div key={index} className='flex justify-center items-center m-2'>
+                                <ProductCard
+                                    name={product.name}
+                                    image={product.image}
+                                    price={product.price}
+                                    category={product.category}
+                                    brand={product.brand}
+                                />
+                            </div>
+                        ))
+                        }
+                    </div>
+                </Suspense>
             </div >
         </>
     )

@@ -15,8 +15,6 @@ export const POST = async (req) => {
     //get form data from client 
     const formData = await req.formData()
     const file = formData.get('file')
-    console.log("files:", file)
-    console.log('formData:', formData)
 
     //values prep for sql db
     const values = {
@@ -34,14 +32,10 @@ export const POST = async (req) => {
       let fileName;
       fileName = file.name.toString()
       const fileType = fileName.slice(fileName.lastIndexOf('.'), fileName.length)
-      console.log("NAME: ", fileName)
-      console.log("TYPE: ", fileType)
 
       //create a unique file name with ext
       fileName = formData.get("name").toString() + "_" + Date.now() + fileType
       fileName = fileName.replaceAll(" ", "_")
-      console.log("NAME AFTER: ", fileName)
-      
 
       //add item to a sql db, if name is already added increment quantity, before saving file 2
       const q = await pool.query(

@@ -9,7 +9,6 @@ export const GET = async (req) => {
 
         const url = new URL(req.url)
         const name = url.searchParams.get('name')
-        console.log(name)
 
         if (!name || name.length == 0) {
             throw new Error("No parameters passed")

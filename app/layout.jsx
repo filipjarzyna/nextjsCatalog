@@ -12,7 +12,7 @@ const RootLayout = ({ children }) => {
         <html lang="pl">
             <body className='bg-black text-white font-sans'>
                 <Navbar/>
-                <main className='container mx-auto'>
+                <main className=''>
                     {children}
                 </main>
             </body>
